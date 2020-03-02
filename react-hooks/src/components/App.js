@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from 'react';
 import reducer from "../reducers/"
+import Event from "./Event"
 
 function App() {
   const [state, dispatch] = useReducer(reducer, [])
@@ -38,8 +39,8 @@ function App() {
             <th>ID</th>
             <th>タイトル</th>
             <th>ボディー</th>
-            <th></th>
           </tr>
+          { state.map(event => <Event key={event.id} event={event} dispatch={dispatch}/>) }
         </thead>
         <tbody>
         </tbody>
