@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useState, useReducer } from 'react';
+import reducer from "../reducers/"
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, [])
+  const [title, setTitle] = useState("")
+  const [body, setBody] = useState("")
+
+  const addEvent = e => {
+    e.preventDefault()
+    dispatch({type:"CREATE_EVENT",title, body})
+    setTitle("")
+    setBody("")
+  }
+
   return (
     <>
       <h4>イベント作成フォーム</h4>
       <form>
         <div>
           <label　htmlFor="title">タイトル</label>
-          <input type="text" id="title" size="40"/>
+          <input onChange={(e)=>{setTitle(e.target.value)}} type="text" value={title} id="title" size="40"/>
         </div>
         <div>
-          <label htmlFor="event">イベント</label>
-          <input type="text" id="event" size="40"/>
+          <label htmlFor="body">イベント</label>
+          <input onChange={(e) => setBody(e.target.value)} type="text" value={body} id="body" size="40"/>
         </div>
         <div>
-          <button>イベントを作成</button>
+          <button onClick={addEvent}>イベントを作成</button>
           <button>全てのイベントを削除</button>
         </div>
       </form>
