@@ -14,6 +14,12 @@ function App() {
     setBody("")
   }
 
+  const allEventDelete = e => {
+    e.preventDefault()
+    const result = window.confirm("全て削除してよろしいですか？")
+    if(result)  dispatch({type:"DELETE_ALL_EVENT"}) 
+  }
+
   return (
     <>
       <h4>イベント作成フォーム</h4>
@@ -27,8 +33,8 @@ function App() {
           <input onChange={(e) => setBody(e.target.value)} type="text" value={body} id="body" size="40"/>
         </div>
         <div>
-          <button onClick={addEvent}>イベントを作成</button>
-          <button>全てのイベントを削除</button>
+          <button onClick={addEvent} disabled={title === "" || body === "" ? true : false}>イベントを作成</button>
+          <button onClick={allEventDelete} disabled={state.length ? false : true }>全てのイベントを削除</button>
         </div>
       </form>
 

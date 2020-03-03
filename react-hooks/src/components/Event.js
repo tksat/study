@@ -3,7 +3,8 @@ import React from "react"
 const Event = ({event, dispatch}) => {
   const {id, title, body} = event
   const deleteEvent = () => {
-    dispatch({type:"DELETE_EVENT", id})
+    const result = window.confirm(`${event.id}のイベントを削除してよろしいですか？`)
+    if(result)  dispatch({type:"DELETE_EVENT", id}) 
   }
 
   return(
