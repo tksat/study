@@ -15,7 +15,7 @@ const EventList = () => {
             <th>タイトル</th>
             <th>ボディー</th>
           </tr>
-          { state.map(event => <Event key={event.id} event={event} />) }
+          { state.events.map(event => <Event key={event.id} event={event} />) }
         </thead>
         <tbody>
         </tbody>

@@ -34,7 +34,7 @@ const Form = () => {
         </div>
         <div>
           <button onClick={addEvent} disabled={title === "" || body === "" ? true : false}>イベントを作成</button>
-          <button onClick={allEventDelete} disabled={state.length ? false : true }>全てのイベントを削除</button>
+          <button onClick={allEventDelete} disabled={state.events.length === 0 }>全てのイベントを削除</button>
         </div>
       </form>
     </>
