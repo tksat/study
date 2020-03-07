@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react"
-import { CREATE_EVENT, DELETE_ALL_EVENT } from "../actions/"
+import { CREATE_EVENT, DELETE_ALL_EVENT, ADD_OPERATION_LOG, DELETE_ALL_OPERATION_LOGS } from "../actions/"
 import AppContext from "../contexts/AppContext"
 
 const Form = () => {
@@ -10,6 +10,7 @@ const Form = () => {
   const addEvent = e => {
     e.preventDefault()
     dispatch({type: CREATE_EVENT,title, body})
+    dispatch({type:ADD_OPERATION_LOG, operation:"イベントを追加しました"})
     setTitle("")
     setBody("")
   }
@@ -17,7 +18,16 @@ const Form = () => {
   const allEventDelete = e => {
     e.preventDefault()
     const result = window.confirm("全て削除してよろしいですか？")
-    if(result)  dispatch({type: DELETE_ALL_EVENT}) 
+    if(result){
+      dispatch({type: DELETE_ALL_EVENT})
+      dispatch({type: ADD_OPERATION_LOG, operation: "全てのイベントを削除しました"})
+    }
+  }
+
+  const allOperationLogsDelete = e => {
+    e.preventDefault()
+    const result = window.confirm("全てのログを削除していいですか？")
+    if(result) dispatch({type: DELETE_ALL_OPERATION_LOGS})
   }
 
   return (
@@ -35,6 +45,7 @@ const Form = () => {
         <div>
           <button onClick={addEvent} disabled={title === "" || body === "" ? true : false}>イベントを作成</button>
           <button onClick={allEventDelete} disabled={state.events.length === 0 }>全てのイベントを削除</button>
+          <button onClick={allOperationLogsDelete} disabled={state.operationLogs.length === 0 }>全てのイベントを削除</button>
         </div>
       </form>
     </>

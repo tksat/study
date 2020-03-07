@@ -2,21 +2,23 @@ import React, { useReducer } from 'react';
 import Form from "./Form"
 import EventList from "./EventList"
 import AppContext from "../contexts/AppContext"
+import OperationLogs from "./OperationLogs"
 import reducer from "../reducers/"
 
-function App() {
+
+const App = () => {
   const initialState = {
-    events:[]
+    events:[],
+    operationLogs:[]
   }
   
   const [state, dispatch] = useReducer(reducer, initialState)
-
-  console.log(state)
 
   return (
     <AppContext.Provider value={{state, dispatch}}>
       <Form/>
       <EventList/>
+      { state.operationLogs.length === 0 ? null : <OperationLogs /> }
     </AppContext.Provider>
   );
 }

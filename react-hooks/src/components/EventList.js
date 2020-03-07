@@ -6,18 +6,15 @@ const EventList = () => {
   const { state } = useContext(AppContext)
   return (
     <>
-      <div>value</div>
       <h4>イベント一覧</h4>
       <table>
-        <thead>
+        <tbody>
           <tr>
             <th>ID</th>
             <th>タイトル</th>
             <th>ボディー</th>
           </tr>
           { state.events.map(event => <Event key={event.id} event={event} />) }
-        </thead>
-        <tbody>
         </tbody>
       </table>
     </>
