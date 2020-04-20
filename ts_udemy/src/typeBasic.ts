@@ -43,16 +43,16 @@ console.log(returnNothing())
 
 //never型 例外を返す物に設定（エラー型とか）
 //void型との違いは、呼び元に戻ってこない事
-// function error(message: string): never{
-//   throw new Error(message)
-// }
+function error(message: string): never{
+  throw new Error(message)
+}
 
-// try{
-//   let result = error('エラーです')
-//   console.log({ result })
-// }catch(error){
-//   console.log({ error })
-// }
+try{
+  let result = error('エラーです')
+  console.log({ result })
+}catch(error){
+  console.log({ error })
+}
 
 //null型 undefined型（基本使用しない）
 let absence: null = null
@@ -62,16 +62,17 @@ let data: undefined = undefined
 let profile: { name: string } = {name: 'sat'}
 
 //型エイリアス
+//頭文字が必ず大文字にする
 type Moji = string;
 const fooString: string = "hello"
 const moji: Moji = "moji" 
 
-type profile = {
+type Profile = {
   name: string
   age: number
 }
 
-const user: profile = {
+const user: Profile = {
   name: "sato",
   age: 30
 }
@@ -95,3 +96,65 @@ const profile3: objectType = {
   name: "sato",
   age: 30
 }
+
+//intersection
+//既存の型を利用して新たな型を作る
+
+type Picher1 = {
+  throwingspeed: number;
+}
+
+type Batter1 = {
+  battingAverage: number;
+}
+
+type ToWayPlayer = Picher1 & Batter1;
+
+const shouhei: ToWayPlayer = {
+  throwingspeed: 105,
+  battingAverage: 0.2
+}
+
+
+//union型
+//複数の型を持たせたい
+
+let value: string | number = "sato"
+value = 30
+
+
+//Literal型
+//細かい型指定ができる
+
+let weekend: "日" = "日"
+let week: '月'|'火'|'水'|'木'|'金' = '火'
+
+//enum型
+//数値や文字列を列挙する時に便利な型
+
+enum Manths {
+  janudary = 1, //列挙する最初の数字を初期設定できる
+  february,
+  march,
+  april,
+  may
+}
+
+console.log(Manths.janudary) // 結果：　0
+console.log(Manths.february); // 結果：　0
+
+enum COLORS {
+  RED = '#FF0000',
+  WHITE = '#FFFFFF',
+  BLUE = '#0000FF'
+}
+
+console.log(COLORS.RED)
+console.log(COLORS.BLUE)
+
+enum COLORS {
+  YERROW = '#FFFF00',
+  GRAY = '#333333'
+}
+
+console.log(COLORS.YERROW)
