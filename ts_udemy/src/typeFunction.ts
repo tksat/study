@@ -43,3 +43,46 @@ const bmi4: (height: number, weight: number, printable?: boolean) => number = (
   }
 
   bmi4(1.67, 50, true)
+
+
+  //▼デフォルトパラメータ-
+  const multiplication: (x?: number, y?: number) => number = (x: number = 3, y: number = 2): number => {
+      return x * y
+  }
+
+  console.log(multiplication())
+
+
+   //▼レストパラメータ-の型づけ
+   //...value: number[]
+
+   const sum:(...value: number[]) => number = 
+   (...value: number[]):number => {
+      return value.reduce(reducer)
+  }
+
+   const reducer:(x: number, y: number) => number =
+    (x: number, y: number): number => {
+     return x + y
+   }
+
+   console.log(sum(1, 2, 3, 4))
+
+
+   //▼型のオーバーロード(シグネチャー)
+   function double(value: number): number
+   function double(value: string): string
+
+   //本体の型はanyに設定しておく。
+   //シグネチャーでnumberとstringのみしか受け取れなくなっている
+   function double(value: any): any{
+      if(typeof value === "number"){
+        return value * value
+      }else{
+        return value + value
+      }
+   }
+
+   console.log(double(20))
+   console.log(double("Hello!"))
+  
