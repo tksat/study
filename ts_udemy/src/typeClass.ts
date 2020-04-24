@@ -70,3 +70,48 @@ class Person3 {
 
 const tanaka = new Person3("棚中", 44, "韓国")
 console.log(tanaka.profile())
+
+//▼getter と setter
+class MynumberCard {
+  private _owner: string
+  private _secretNumber: number
+
+  constructor(owner: string, secretNumber: number) {
+    this._owner = owner
+    this._secretNumber = secretNumber
+  }
+
+  get owner() {
+    return this._owner
+  }
+
+  set secretNumber(secretNumber: number) {
+    this._secretNumber = secretNumber
+  }
+
+  debug() {
+    return `secretNumber: ${this._secretNumber}`
+  }
+}
+
+const card = new MynumberCard("さと", 123456)
+console.log("dard :", card.owner)
+console.log(card.debug())
+card.secretNumber = 333333
+console.log(card.debug())
+
+//readOnry 修飾子
+class VisaCard {
+  readonly owner: string
+
+  constructor(owner: string) {
+    this.owner = owner
+  }
+}
+const takadaCard = new VisaCard("高田のカードです")
+console.log("takadaCard", takadaCard.owner)
+
+//readOnry 修飾子の短い記述方法
+class VisaCard2 {
+  constructor(public readonly owner: string) {}
+}
