@@ -115,3 +115,84 @@ console.log("takadaCard", takadaCard.owner)
 class VisaCard2 {
   constructor(public readonly owner: string) {}
 }
+
+//▼静的メンバについて
+//static修飾子はnewせず直接呼び出す
+class Me {
+  static isProgramer: boolean = true
+  static firstName: string = "tanaka"
+  static lastName: string = "tadashi"
+
+  static work(): string {
+    return `${this.firstName}さん、関数も静的メンバにできるよ`
+  }
+}
+
+// ↓ staticがなかった場合
+// const me = new Me()
+// console.log(me.isProgramer)
+
+console.log("static", Me.isProgramer)
+console.log("static", Me.work())
+
+//▼namespaceによる名前空間
+//同じ命名のものを作ることができる
+
+namespace Japanese {
+  export class Person {
+    constructor(public name: string) {
+      this.name = name
+    }
+  }
+
+  export namespace Tokyo {
+    export class Person {
+      constructor(public name: string) {
+        this.name = name
+      }
+    }
+  }
+}
+
+namespace English {
+  export class Person {
+    constructor(public firstName: string, public lastName: string) {}
+  }
+}
+
+const me = new Japanese.Person("田中")
+console.log(me.name)
+
+const sat = new Japanese.Tokyo.Person("熊谷")
+console.log(sat)
+
+const michael = new English.Person("Michael", "Joseph")
+console.log(`${michael.firstName}・${michael.lastName}`)
+
+//▼classの拡張
+// 既存のclassを拡張して新たなclassを作る
+
+class Animal {
+  constructor(public name: string) {}
+
+  run(): string {
+    return "I can run"
+  }
+}
+
+class Lion extends Animal {
+  constructor(name: string, public speed: number) {
+    //superは親に渡す
+    super(name)
+  }
+
+  run(): string {
+    //super.run() → 親クラスの関数が呼べる(ts表記)
+    return `${this.name} ${super.run()} ${this.speed}km`
+  }
+}
+
+const cat = new Animal("cat")
+console.log(cat.run())
+const lion = new Lion("Lion", 80)
+console.log(lion.run())
