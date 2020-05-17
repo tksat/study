@@ -50,3 +50,9 @@
 .lightText {
   color: #999;
 }
+
+.twitter {
+  display: block;
+  width: 40px;
+  height: auto;
+}
