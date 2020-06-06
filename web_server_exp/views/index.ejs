@@ -1,0 +1,13 @@
+<%- include("patials/header")%>
+
+<h1><%= data %></h1>
+<p><%= siteInfo.name %></p>
+<p><%= siteInfo.owner %></p>
+
+<ul>
+  <% items.forEach(item => { %>
+  <li><%= item.name %></li>
+  <% }) %>
+</ul>
+
+<%- include("patials/footer")%>
