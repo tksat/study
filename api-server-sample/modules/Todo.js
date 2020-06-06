@@ -3,7 +3,7 @@ const todos = []
 
 //インクリメントしていく値
 //インクリメント => 1を加算していく事を指す
-const nextId = 1
+let nextId = 1
 
 class Todos {
   constructor({ title, body }) {
@@ -15,6 +15,21 @@ class Todos {
   }
 }
 
+//todosに値を格納
+for (let i = 0; i < 5; i++) {
+  const index = i + 1
+  const todo = new Todos({
+    title: `タイトル${index}`,
+    body: `ボディー${index}`,
+  })
+  todos.push(todo)
+}
+
 //外部からアクセスできるようにする
 //ここにメゾットを実行していく
-module.exports = {}
+//slice => コピーして新たな変数を作るメゾット
+module.exports = {
+  findAll: () => {
+    return todos.slice()
+  },
+}
