@@ -18,7 +18,7 @@ describe("Todo.findAllメゾットのテスト", () => {
           title: todo.title,
           body: todo.body,
           createdAt: todo.createdAt,
-          ubdatedAt: todo.ubdatedAt,
+          updatedAt: todo.updatedAt,
         }
       )
     })

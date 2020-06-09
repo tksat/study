@@ -24,7 +24,7 @@ describe("test GET/api/todos", () => {
       assert.equal(typeof todo.title === "string", true)
       assert.equal(typeof todo.body === "string", true)
       assert.equal(typeof todo.createdAt === "string", true)
-      assert.equal(typeof todo.ubdatedAt === "string", true)
+      assert.equal(typeof todo.updatedAt === "string", true)
     })
   })
 })

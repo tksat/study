@@ -11,7 +11,7 @@ class Todos {
     this.title = title
     this.body = body
     this.createdAt = new Date()
-    this.ubdatedAt = new Date()
+    this.updatedAt = new Date()
   }
 }
 
@@ -31,5 +31,17 @@ for (let i = 0; i < 5; i++) {
 module.exports = {
   findAll: () => {
     return todos.slice()
+  },
+
+  //Todoを追加
+  //Todo1件を呼び出し元に返す
+  create: ({ title, body }) => {
+    if (!title) throw new Error("titleは必須です")
+    if (!body) throw new Error("bodyは必須です")
+
+    const todo = new Todos({ title, body })
+    todos.push(todo)
+
+    return todo
   },
 }
