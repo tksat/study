@@ -7,7 +7,6 @@ module.exports = {
   },
 
   postTodo: (req, res) => {
-    console.log(req.body, "@@@@@@@@@@@")
     try {
       const { title, body } = req.body
       const createdTodo = Todo.create({ title, body })
