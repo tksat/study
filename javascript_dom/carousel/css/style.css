@@ -1,0 +1,129 @@
+.button_arrow-prev::after, .button_arrow-next::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  border-top: 2px solid #000;
+}
+
+body,
+img,
+h1,
+li,
+ul,
+section,
+div {
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  color: blue;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.content {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.title {
+  padding: 30px 0;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel_inner {
+  overflow: hidden;
+  position: relative;
+}
+
+.slider {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.dot {
+  position: absolute;
+  bottom: -30px;
+  z-index: 2;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.dot_item {
+  width: 14px;
+  height: 14px;
+  margin: 0 5px;
+  border: 2px solid #000;
+  border-radius: 7px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dot_item-active {
+  background: #000;
+}
+
+.button_arrow {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background: #fff;
+  border: 2px solid #000;
+  position: absolute;
+  border-radius: 20px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.button_arrow:hover {
+  background: #eee;
+}
+
+.button_arrow-prev {
+  left: -20px;
+  position: absolute;
+}
+
+.button_arrow-prev::after {
+  left: calc(50% + 2px);
+  border-left: 2px solid #000;
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+          transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.button_arrow-next {
+  right: -20px;
+}
+
+.button_arrow-next::after {
+  left: calc(50% - 2px);
+  border-right: 2px solid #000;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+          transform: translate(-50%, -50%) rotate(45deg);
+}
+/*# sourceMappingURL=style.css.map */
