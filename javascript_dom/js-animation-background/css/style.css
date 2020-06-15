@@ -1,0 +1,27 @@
+section {
+  height: 300px;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+}
+
+section .text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.parallax01 {
+  background-image: url("../images/01.jpg");
+}
+
+.parallax02 {
+  background-image: url("../images/02.jpg");
+}
+
+.parallax {
+  background-size: cover;
+  background-position: center 0;
+}
+/*# sourceMappingURL=style.css.map */
