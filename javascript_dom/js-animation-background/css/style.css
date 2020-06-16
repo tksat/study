@@ -21,7 +21,7 @@ section .text {
 }
 
 .parallax {
-  background-size: cover;
+  background-size: 170%;
   background-position: center 0;
 }
 /*# sourceMappingURL=style.css.map */
