@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import * as firebase from "firebase/app"
 import "firebase/firestore"
 
@@ -16,31 +16,41 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 function App() {
-  const handleClick = async () => {
-    const db = firebase.firestore()
+  const [user, setUser] = useState([])
+  const db = firebase.firestore()
 
-    //documentの取得
-    /*
-    const user = await db.collection("user").doc("Q3n403hXwW7vkVKLxDQd").get()
-    console.log(user.data())
-    */
-
-    //collectionの取得
-    //データが複数処理する記述にする事
-    /*
-    const snapShots = await db.collection("user").get()
-    snapShots.forEach((snapShot) => {
-      console.log(snapShot.id, "=>", snapShot.data())
+  //データを取得
+  const handleClickFetchButton = async () => {
+    const _user = []
+    const users = await db.collection("user").get()
+    users.forEach((doc) => {
+      _user.push({
+        id: doc.id,
+        ...doc.data(),
+      })
     })
-    */
-
-    //条件絞り込み where
+    setUser(_user)
   }
+
+  //データを追加
+  const handleClickAddButton = async () => {
+    await db.collection("user").set()
+  }
+
+  const userLists = user.map((data) => {
+    return (
+      <li key={data.id}>
+        {data.name} : {data.age}
+      </li>
+    )
+  })
 
   return (
     <>
       <h1>Hello Wold</h1>
-      <button onClick={handleClick}>取得</button>
+      <button onClick={handleClickFetchButton}>取得</button>
+      <button onClick={handleClickAddButton}>追加得</button>
+      <ul>{userLists}</ul>
     </>
   )
 }
