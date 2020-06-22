@@ -17,6 +17,9 @@ firebase.initializeApp(firebaseConfig)
 
 function App() {
   const [user, setUser] = useState([])
+  const [name, setName] = useState("")
+  const [age, setAge] = useState("")
+  const [userId, setUserId] = useState("")
   const db = firebase.firestore()
 
   //データを取得
@@ -34,13 +37,69 @@ function App() {
 
   //データを追加
   const handleClickAddButton = async () => {
-    await db.collection("user").set()
+    if (name === "" || age === "") {
+      alert("正しく入力してください")
+      return
+    }
+
+    //文字列を数字に変換する
+    const parsedAge = parseInt(age, 10)
+
+    //数字文字チェック
+    if (isNaN(parsedAge)) {
+      alert("数字を入力してください")
+      return
+    }
+
+    await db.collection("user").add({ name, age })
+    setName("")
+    setAge("")
+  }
+
+  //データを変更
+  const handleClickChangeButton = async () => {
+    if (!userId) {
+      alert("idを入力してください")
+      return
+    }
+
+    const newData = {}
+    if (name) {
+      newData["name"] = name
+    }
+    if (age) {
+      newData["age"] = parseInt(age, 10)
+    }
+
+    try {
+      await db.collection("user").doc(userId).update(newData)
+      setName("")
+      setAge("")
+      setUserId("")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  //データの削除
+  const handleClickDeleteButton = async () => {
+    if (!userId) {
+      alert("idを入力してください")
+      return
+    }
+
+    await db.collection("user").doc(userId).delete()
+    setName("")
+    setAge("")
+    setUserId("")
   }
 
   const userLists = user.map((data) => {
     return (
       <li key={data.id}>
-        {data.name} : {data.age}
+        <div>id: {data.id}</div>
+        <div>name: {data.name}</div>
+        <div>age: {data.age}</div>
       </li>
     )
   })
@@ -49,7 +108,35 @@ function App() {
     <>
       <h1>Hello Wold</h1>
       <button onClick={handleClickFetchButton}>取得</button>
-      <button onClick={handleClickAddButton}>追加得</button>
+      <div>
+        <div>
+          <span>name</span>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <span>age</span>
+          <input
+            type="text"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+          />
+        </div>
+        <div>
+          <span>id</span>
+          <input
+            type="text"
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+          />
+        </div>
+        <button onClick={handleClickAddButton}>追加</button>
+        <button onClick={handleClickChangeButton}>変更</button>
+        <button onClick={handleClickDeleteButton}>削除</button>
+      </div>
       <ul>{userLists}</ul>
     </>
   )
