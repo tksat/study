@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import * as firebase from "firebase/app"
 import "firebase/firestore"
 
@@ -20,12 +20,35 @@ function App() {
   const [name, setName] = useState("")
   const [age, setAge] = useState("")
   const [userId, setUserId] = useState("")
-  const db = firebase.firestore()
+
+  //更新を検知
+  useEffect(() => {
+    const db = firebase.firestore()
+    const unsubscribe = db
+      .collection("user")
+      .orderBy("age")
+      .onSnapshot((querySnaphot) => {
+        //   querySnaphot.forEach((doc) => {
+        //     console.log("検知!!")
+        //     console.log(doc.id, doc.data())
+        //     console.log("---------------------")
+        //   })
+        const _users = querySnaphot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() }
+        })
+        setUser(_users)
+      })
+
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
   //データを取得
   const handleClickFetchButton = async () => {
+    const db = firebase.firestore()
     const _user = []
-    const users = await db.collection("user").get()
+    const users = await db.collection("user").orderBy("age").get()
     users.forEach((doc) => {
       _user.push({
         id: doc.id,
@@ -37,6 +60,8 @@ function App() {
 
   //データを追加
   const handleClickAddButton = async () => {
+    const db = firebase.firestore()
+
     if (name === "" || age === "") {
       alert("正しく入力してください")
       return
@@ -58,6 +83,8 @@ function App() {
 
   //データを変更
   const handleClickChangeButton = async () => {
+    const db = firebase.firestore()
+
     if (!userId) {
       alert("idを入力してください")
       return
@@ -83,6 +110,8 @@ function App() {
 
   //データの削除
   const handleClickDeleteButton = async () => {
+    const db = firebase.firestore()
+
     if (!userId) {
       alert("idを入力してください")
       return
